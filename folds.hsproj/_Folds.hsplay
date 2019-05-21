@@ -1,7 +1,0 @@
--- Haskell Playground 1.0
-foldr  (:) [] [1, 2, 3]
-foldr' (:) [] [1, 2, 3]
-
-foldl  (flip (:)) [] [1, 2, 3]
-foldl' (flip (:)) [] [1, 2, 3]
-

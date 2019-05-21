@@ -1,9 +1,9 @@
-class Monoid' a where 
+class Monoid' a where
   mempty' :: a
   mappend' :: a -> a -> a
 
 foldMap' :: (Foldable t, Monoid' m) => (a -> m) -> t a -> m
-foldMap' f as = foldr (\a b -> f a `mappend'` b) mempty' as
+foldMap' f = foldr (\a b -> f a `mappend'` b) mempty'
 
 
 newtype Endo' a = Endo' {appEndo' :: a -> a}
@@ -25,4 +25,8 @@ instance (Monoid' a) => Monoid' (Dual' a) where
 foldl' :: (Foldable t) => (b -> a -> b) -> b -> t a -> b
 foldl' f z as = appEndo' (getDual' (foldMap' (Dual' . Endo' . flip f) as)) z
 
+main :: IO ()
+main = do
+  print (foldr' (:) [] [1, 2, 3, 4])
+  print (foldl  (flip (:)) [] [1, 2, 3])
   
