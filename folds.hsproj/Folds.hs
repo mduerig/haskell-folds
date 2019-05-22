@@ -3,7 +3,8 @@ class Monoid' a where
   mappend' :: a -> a -> a
 
 foldMap' :: (Foldable t, Monoid' m) => (a -> m) -> t a -> m
-foldMap' f = foldr (\a b -> f a `mappend'` b) mempty'
+--foldMap' f = foldr (\a b -> f a `mappend'` b) mempty'
+foldMap' f = foldr (mappend' . f) mempty'
 
 
 newtype Endo' a = Endo' {appEndo' :: a -> a}
